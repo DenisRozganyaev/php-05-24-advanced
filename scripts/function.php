@@ -1,3 +1,5 @@
 <?php
 
-echo __FILE__;
+if ($_GET['show_file']) {
+    echo __FILE__;
+}
