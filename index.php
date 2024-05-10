@@ -1,5 +1,11 @@
 <?php
 
-phpinfo();
+require_once __DIR__ . '/scripts/function.php';
 
-exit;
+if ($_GET['info']) {
+
+    phpinfo();
+
+    exit;
+
+}
