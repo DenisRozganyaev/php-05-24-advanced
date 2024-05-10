@@ -1,3 +1,5 @@
 <?php
 
-echo __FILE__;
+echo __FILE__ . ' - ' . __LINE__;
+
+die('end');
