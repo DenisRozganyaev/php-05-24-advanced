@@ -3,11 +3,10 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "App\\": "App/",
-            "MyLib\\": "src/"
+            "App\\": "App/"
         },
         "files": [
-            "helpers/functions.php"
+            "core/helpers.php"
         ]
     },
     "require": {
