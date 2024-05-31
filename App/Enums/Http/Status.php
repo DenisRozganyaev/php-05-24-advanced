@@ -17,20 +17,20 @@ enum Status: int
     public function withDescription()
     {
         $description = match ($this->value) {
-            200 => '200 OK',
-            201 => '201 CREATED',
-            400 => '400 Bad Request',
-            401 => '401 Unauthorized',
-            404 => '401 Not found',
-            403 => '403 Forbidden',
-            405 => '405 Method not allowed',
-            422 => '405 Unprocessable entity',
-            500 => '405 Internal Server error',
+            200 => 'OK',
+            201 => 'CREATED',
+            400 => 'Bad Request',
+            401 => 'Unauthorized',
+            404 => 'Not found',
+            403 => 'Forbidden',
+            405 => 'Method not allowed',
+            422 => 'Unprocessable entity',
+            500 => 'Internal Server error',
         };
 
         return [
             'code' => $this->value,
-            'status' => $description
+            'status' => $this->value . ' ' . $description
         ];
     }
 }
