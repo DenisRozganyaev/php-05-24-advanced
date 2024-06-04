@@ -1,6 +1,12 @@
 <?php
 
 use App\Enums\Http\Status;
+use Core\DB;
+
+function db(): PDO
+{
+    return DB::connect();
+}
 
 function jsonResponse(Status $status, array $data = []): string
 {
