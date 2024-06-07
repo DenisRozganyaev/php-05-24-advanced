@@ -11,7 +11,7 @@ class DB
     static public function connect(): PDO
     {
         if (is_null(static::$instance)) {
-            $dsn = 'mysql:host=database;dbname=php_05_advanced';
+            $dsn = 'mysql:host='. getenv('DB_HOST') .';dbname=' . getenv('DB_NAME');
             $options = [
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
@@ -19,8 +19,8 @@ class DB
 
             static::$instance = new PDO(
                 $dsn,
-                'root',
-                'secret',
+                getenv('DB_USER'),
+                getenv('DB_PASSWORD'),
                 $options
             );
         }
