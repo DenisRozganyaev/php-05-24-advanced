@@ -69,6 +69,29 @@ trait Queryable
         return $query->fetchObject(static::class);
     }
 
+    static public function create(array $fields): null|static
+    {
+        $params = static::prepareQueryParams($fields);
+        $query = db()->prepare("INSERT INTO " . static::$tableName . " ($params[keys]) VALUES ($params[placeholders])");
+
+        if (!$query->execute($fields)) {
+            return null;
+        }
+
+        return static::find(db()->lastInsertId());
+    }
+
+    static protected function prepareQueryParams(array $fields): array
+    {
+        $keys = array_keys($fields);
+        $placeholders = preg_filter('/^/', ':', $keys); // name = :name
+
+        return [
+            'keys' => implode(', ', $keys),
+            'placeholders' => implode(', ', $placeholders)
+        ];
+    }
+
     static protected function resetQuery(): void
     {
         static::$query = '';

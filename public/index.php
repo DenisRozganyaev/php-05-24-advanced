@@ -15,27 +15,27 @@ try {
     die(Router::dispatch($_SERVER['REQUEST_URI']));
 } catch (PDOException $exception) {
     die(
-        jsonResponse(
-            Status::UNPROCESSABLE_ENTITY,
-            [
-                'errors' => [
-                    'message' => $exception->getMessage(),
-                    'trace' => $exception->getTrace()
-                ]
+    jsonResponse(
+        Status::UNPROCESSABLE_ENTITY,
+        [
+            'errors' => [
+                'message' => $exception->getMessage(),
+                'trace' => $exception->getTrace()
             ]
-        )
+        ]
+    )
     );
 } catch (Throwable $exception) {
     dd($exception);
     die(
-        jsonResponse(
-            Status::from($exception->getCode()),
-            [
-                'errors' => [
-                    'message' => $exception->getMessage(),
-                    'trace' => $exception->getTrace()
-                ]
+    jsonResponse(
+        Status::from($exception->getCode()),
+        [
+            'errors' => [
+                'message' => $exception->getMessage(),
+                'trace' => $exception->getTrace()
             ]
-        )
+        ]
+    )
     );
 }
