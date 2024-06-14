@@ -2,6 +2,7 @@
 
 use App\Enums\Http\Status;
 use Core\DB;
+use ReallySimpleJWT\Token;
 
 function db(): PDO
 {
@@ -32,4 +33,32 @@ function requestBody(): array
     }
 
     return $data;
+}
+
+function getAuthToken(): string
+{
+    $headers = apache_request_headers();
+
+    if (empty($headers['Authorization'])) {
+        throw new Exception('The request should contain an auth token', 422);
+    }
+
+    $token = str_replace('Bearer ', '', $headers['Authorization']);
+
+    if (!Token::validateExpiration($token)) {
+        throw new Exception('Token is invalid', 422);
+    }
+
+    return $token;
+}
+
+function authId(): int
+{
+    $token = Token::getPayload(getAuthToken());
+
+    if (empty($token['user_id'])) {
+        throw new Exception('Token structure is invalid', 422);
+    }
+
+    return $token['user_id'];
 }
