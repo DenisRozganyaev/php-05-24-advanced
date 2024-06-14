@@ -11,7 +11,7 @@ use ReallySimpleJWT\Token;
 
 class AuthController extends Controller
 {
-    public function register()
+    public function register(): array
     {
         $fields = requestBody();
         if (RegisterValidator::validate($fields)) {
@@ -26,7 +26,7 @@ class AuthController extends Controller
         return $this->response(Status::UNPROCESSABLE_ENTITY, $fields, RegisterValidator::getErrors());
     }
 
-    public function auth()
+    public function auth(): array
     {
         $fields = requestBody();
 
@@ -41,6 +41,6 @@ class AuthController extends Controller
             }
         }
 
-        return $this->response(Status::UNPROCESSABLE_ENTITY, errors: RegisterValidator::getErrors());
+        return $this->response(Status::UNPROCESSABLE_ENTITY, errors: AuthValidator::getErrors());
     }
 }
