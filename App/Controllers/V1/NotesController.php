@@ -53,17 +53,17 @@ class NotesController extends BaseApiController
 
     public function update(int $id): array
     {
-        $fields = requestBody();
-        $updateFields = [
-            ...$fields,
-            'updated_at' => date('Y-m-d H:i:s')
-        ];
+//        $fields = requestBody();
+//        $updateFields = [
+//            ...$fields,
+//            'updated_at' => date('Y-m-d H:i:s')
+//        ];
+//
+//        if (NoteValidator::validate($fields) && $Note = $this->model->update($updateFields)) {
+//            return $this->response(Status::OK, $Note->toArray());
+//        }
 
-        if (NoteValidator::validate($fields) && $Note = $this->model->update($updateFields)) {
-            return $this->response(Status::OK, $Note->toArray());
-        }
-
-        return $this->response(Status::OK, errors: NoteValidator::getErrors());
+        return $this->response(Status::OK, []);
     }
 
     public function delete(int $id): array
